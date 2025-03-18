@@ -1,0 +1,30 @@
+{
+  "name": "siyabongasamson-lukhele-959-contentitem-javascript",
+  "version": "1.0.0",
+  "description": "A simple project meant to mimic a simple bank system",
+  "homepage": "https://github.com/Umuzi-org/SiyabongaSamson-Lukhele-959-contentitem-javascript#readme",
+  "bugs": {
+    "url": "https://github.com/Umuzi-org/SiyabongaSamson-Lukhele-959-contentitem-javascript/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Umuzi-org/SiyabongaSamson-Lukhele-959-contentitem-javascript.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Siyabonga Samson Lukhele",
+    "email": "samsonlukhele76@gmail.com",
+    "portfolio-website": "https://markuptitan.site"
+  },
+  "type": "commonjs",
+  "main": "src/bank_account.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "dependencies": {
+    "decimal.js": "^10.5.0"
+  },
+  "devDependencies": {
+    "jasmine": "^5.6.0"
+  }
+}
