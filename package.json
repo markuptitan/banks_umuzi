@@ -19,12 +19,13 @@
   "type": "commonjs",
   "main": "src/bank_account.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "nyc jasmine"
   },
   "dependencies": {
     "decimal.js": "^10.5.0"
   },
   "devDependencies": {
-    "jasmine": "^5.6.0"
+    "jasmine": "^5.6.0",
+    "nyc": "^17.1.0"
   }
 }
