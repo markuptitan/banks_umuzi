@@ -11,6 +11,14 @@ class BankAccount {
     assert(amount > 0, "Deposit amount must be positive");
     this.balance = new Decimal(this.balance).plus(amount).toFixed(2);
   }
+  withdraw({ amount }) {
+    assert(amount > 0, "Withdrawal amount must be positive");
+    assert(
+      amount <= this.balance,
+      "Cannot withdraw more than available balance"
+    );
+    this.balance = new Decimal(this.balance).minus(amount).toFixed(2);
+  }
 }
 
 module.exports = { BankAccount };
