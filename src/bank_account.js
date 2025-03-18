@@ -1,6 +1,10 @@
 const assert = require("assert");
 const Decimal = require("decimal.js");
 
+const validatePositiveNumber = (value, errorMessage) => {
+  assert(value > 0, errorMessage);
+};
+
 class BankAccount {
   constructor({ interestRate }) {
     assert(interestRate >= 0, "Interest rate can not be negative");
@@ -9,12 +13,12 @@ class BankAccount {
   }
 
   deposit({ amount }) {
-    assert(amount > 0, "Deposit amount must be positive");
+    validatePositiveNumber(amount, "Deposit amount must be positive");
     this.balance = new Decimal(this.balance).plus(amount).toFixed(2);
   }
 
   withdraw({ amount }) {
-    assert(amount > 0, "Withdrawal amount must be positive");
+    validatePositiveNumber(amount, "Withdrawal amount must be positive");
     assert(
       amount <= this.balance,
       "Cannot withdraw more than available balance"
