@@ -11,4 +11,8 @@ describe("BankAccount tests", () => {
   it("should initialize account with zero balance", () => {
     expect(account.balance).toBe("0.00");
   });
+  it("should deposit money into the account", () => {
+    account.deposit({ amount: 1500 });
+    expect(account.balance).toBe("1500.00");
+  });
 });
