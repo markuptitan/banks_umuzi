@@ -12,18 +12,31 @@ class BankAccount {
     this.interestRate = new Decimal(interestRate);
   }
 
-  deposit({ amount }) {
-    validatePositiveNumber(amount, "Deposit amount must be positive");
+  updateBalance(amount) {
     this.balance = new Decimal(this.balance).plus(amount).toFixed(2);
   }
 
-  withdraw({ amount }) {
-    validatePositiveNumber(amount, "Withdrawal amount must be positive");
-    assert(
-      amount <= this.balance,
-      "Cannot withdraw more than available balance"
+  processAmount = (amount, type) => {
+    validatePositiveNumber(
+      amount,
+      `${type === "deposit" ? "Deposit" : "Withdrawal"} amount must be positive`
     );
-    this.balance = new Decimal(this.balance).minus(amount).toFixed(2);
+    if (type === "withdraw") {
+      assert(
+        amount <= this.balance,
+        "Cannot withdraw more than available balance"
+      );
+    }
+    const adjustment = type === "deposit" ? amount : -amount;
+    this.updateBalance(adjustment);
+  };
+
+  deposit({ amount }) {
+    this.processAmount(amount, "deposit");
+  }
+
+  withdraw({ amount }) {
+    this.processAmount(amount, "withdraw");
   }
 
   compoundInterest() {
@@ -31,7 +44,7 @@ class BankAccount {
       .times(this.interestRate)
       .div(100)
       .div(12);
-    this.balance = new Decimal(this.balance).plus(monthlyInterest).toFixed(2);
+    this.updateBalance(monthlyInterest);
   }
 }
 
