@@ -31,4 +31,28 @@ describe("BankAccount tests", () => {
     account.compoundInterest();
     expect(account.balance).toBe("1010.00");
   });
+
+  it("should throw an error if deposit amount is negative", () => {
+    expect(() => account.deposit({ amount: -500 })).toThrowError(
+      "Deposit amount must be positive"
+    );
+  });
+
+  it("should throw an error if withdraw amount is negative", () => {
+    expect(() => account.withdraw({ amount: -500 })).toThrowError(
+      "Withdrawal amount must be positive"
+    );
+  });
+
+  it("should throw an error if withdrawing more than the balance", () => {
+    expect(() => account.withdraw({ amount: 2000 })).toThrowError(
+      "Cannot withdraw more than available balance"
+    );
+  });
+
+  it("should throw an error if the interest rate is negative", () => {
+    expect(() => new BankAccount({ interestRate: -5 })).toThrowError(
+      "Interest rate can not be negative"
+    );
+  });
 });
