@@ -4,7 +4,7 @@ describe("BankAccount tests", () => {
   let account;
 
   beforeEach(() => {
-    account = new BankAccount({ interestRate: 10 });
+    account = new BankAccount({ interestRate: 12 });
   });
 
   afterEach(() => {
@@ -24,5 +24,11 @@ describe("BankAccount tests", () => {
     account.deposit({ amount: 1500 });
     account.withdraw({ amount: 500 });
     expect(account.balance).toBe("1000.00");
+  });
+
+  it("should calculate compound interest correctly", () => {
+    account.deposit({ amount: 1000 });
+    account.compoundInterest();
+    expect(account.balance).toBe("1010.00");
   });
 });

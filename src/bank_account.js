@@ -19,6 +19,13 @@ class BankAccount {
     );
     this.balance = new Decimal(this.balance).minus(amount).toFixed(2);
   }
+  compoundInterest() {
+    const monthlyInterest = new Decimal(this.balance)
+      .times(this.interestRate)
+      .div(100)
+      .div(12);
+    this.balance = new Decimal(this.balance).plus(monthlyInterest).toFixed(2);
+  }
 }
 
 module.exports = { BankAccount };
