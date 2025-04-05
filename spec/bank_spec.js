@@ -28,7 +28,9 @@ describe("Bank tests", () => {
   it("should not allow duplicate account types", () => {
     bank.addAccountType(savingsAccount);
 
-    expect(() => bank.addAccountType(savingsAccount)).toThrow();
+    expect(() => bank.addAccountType(savingsAccount)).toThrowError(
+      'Account type "Savings" already exists.'
+    );
   });
 
   it("should not allow negative interest rates", () => {
