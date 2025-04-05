@@ -43,4 +43,11 @@ describe("Bank tests", () => {
       );
     });
   });
+  describe("openBankAccount", () => {
+    it("should open an account and return a 10 digit number", () => {
+      expect(isStringOfDigitsOnly(bank.openBankAccount(savingsAccount))).toBe(
+        true
+      );
+    });
+  });
 });

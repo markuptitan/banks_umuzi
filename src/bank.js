@@ -3,6 +3,7 @@ const assert = require("assert");
 class Bank {
   constructor() {
     this.accountTypes = [];
+    this.accounts = [];
   }
   addAccountType({ accountType, interestRate }) {
     assert(
