@@ -6,10 +6,11 @@ const validatePositiveNumber = (value, errorMessage) => {
 };
 
 class BankAccount {
-  constructor({ interestRate }) {
+  constructor({ interestRate, accountNumber }) {
     assert(interestRate >= 0, "Interest rate can not be negative");
     this.balance = new Decimal(0).toFixed(2);
     this.interestRate = new Decimal(interestRate);
+    this.accountNumber = accountNumber;
   }
 
   updateBalance(amount) {
