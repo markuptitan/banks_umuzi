@@ -1,10 +1,11 @@
 const { Bank } = require("./../src/bank");
 
-const savingsAccount = { accountType: "Savings", interestRate: 2.5 };
+const savingsAccount = { accountType: "Savings", interestRate: 5 };
+const currentAccount = { accountType: "Current", interestRate: 2.5 };
+const isStringOfDigitsOnly = (accountNum) => /^\d{10}$/.test(accountNum);
 
 describe("Bank tests", () => {
   let bank;
-
   beforeEach(() => {
     bank = new Bank();
   });
@@ -13,31 +14,33 @@ describe("Bank tests", () => {
     bank = null;
   });
 
-  it("should add account types properly", () => {
-    bank.addAccountType(savingsAccount);
+  describe("addAccountType", () => {
+    it("should add account types properly", () => {
+      bank.addAccountType(savingsAccount);
 
-    expect(
-      bank.accountTypes.some(
-        (acc) =>
-          acc.accountType === savingsAccount.accountType &&
-          acc.interestRate === savingsAccount.interestRate
-      )
-    ).toBe(true);
-  });
+      expect(
+        bank.accountTypes.some(
+          (acc) =>
+            acc.accountType === savingsAccount.accountType &&
+            acc.interestRate === savingsAccount.interestRate
+        )
+      ).toBe(true);
+    });
 
-  it("should not allow duplicate account types", () => {
-    bank.addAccountType(savingsAccount);
+    it("should not allow duplicate account types", () => {
+      bank.addAccountType(savingsAccount);
 
-    expect(() => bank.addAccountType(savingsAccount)).toThrowError(
-      'Account type "Savings" already exists.'
-    );
-  });
+      expect(() => bank.addAccountType(savingsAccount)).toThrowError(
+        'Account type "Savings" already exists.'
+      );
+    });
 
-  it("should not allow negative interest rates", () => {
-    const invalidAccount = { accountType: "Invalid", interestRate: -1 };
+    it("should not allow negative interest rates", () => {
+      const invalidAccount = { accountType: "Invalid", interestRate: -1 };
 
-    expect(() => bank.addAccountType(invalidAccount)).toThrowError(
-      "Interest rate must be greater than 0."
-    );
+      expect(() => bank.addAccountType(invalidAccount)).toThrowError(
+        "Interest rate must be greater than 0."
+      );
+    });
   });
 });
