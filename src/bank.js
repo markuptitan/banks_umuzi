@@ -48,6 +48,7 @@ class Bank {
       interestRate: accountInterest,
       accountNumber,
     });
+    this.accounts.push(bankAccount);
     return bankAccount.accountNumber;
   }
 }
