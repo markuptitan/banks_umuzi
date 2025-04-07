@@ -50,4 +50,19 @@ describe("Bank tests", () => {
       expect(isStringOfDigitsOnly(accNum)).toBe(true);
     });
   });
+
+  describe("deposit", () => {
+    let savingsAccountNumber;
+    beforeEach(() => {
+      bank.addAccountType(savingsAccount);
+      savingsAccountNumber = bank.openBankAccount(savingsAccount);
+    });
+
+    it("should deposit money to an account successfully", () => {
+      bank.deposit({ accountNumber: savingsAccountNumber, amount: 500 });
+      expect(getBalance({ accountNumber: savingsAccountNumber })).toBe(
+        "500.00"
+      );
+    });
+  });
 });
