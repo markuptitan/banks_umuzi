@@ -23,6 +23,12 @@ const generateUniqueAccNumber = (accsArray) => {
   return accountNum;
 };
 
+const retrieveAccount = (accNumber, accsArray) => {
+  const account = accsArray.find((acc) => acc.accountNumber === accNumber);
+  assert(account, `Account ${accNumber} does not exist.`);
+  return account;
+};
+
 class Bank {
   constructor() {
     this.accountTypes = [];
@@ -51,6 +57,11 @@ class Bank {
     });
     this.accounts.push(bankAccount);
     return bankAccount.accountNumber;
+  }
+
+  getBalance({ accountNumber }) {
+    const account = retrieveAccount(accountNumber, this.accounts);
+    return account.balance;
   }
 }
 

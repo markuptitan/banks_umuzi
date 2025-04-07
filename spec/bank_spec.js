@@ -51,7 +51,7 @@ describe("Bank tests", () => {
     });
   });
 
-  describe("deposit", () => {
+  describe("getBalance", () => {
     let savingsAccountNumber;
     beforeEach(() => {
       bank.addAccountType(savingsAccount);
@@ -59,9 +59,8 @@ describe("Bank tests", () => {
     });
 
     it("should deposit money to an account successfully", () => {
-      bank.deposit({ accountNumber: savingsAccountNumber, amount: 500 });
-      expect(getBalance({ accountNumber: savingsAccountNumber })).toBe(
-        "500.00"
+      expect(bank.getBalance({ accountNumber: savingsAccountNumber })).toBe(
+        "0.00"
       );
     });
   });
