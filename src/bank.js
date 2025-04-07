@@ -5,6 +5,7 @@ const getInterestRate = (typeOfAcc, accTypesArray) => {
   const accountType = accTypesArray.find(
     (accType) => accType.accountType === typeOfAcc
   );
+  assert(accountType, `Account type "${typeOfAcc}" does not exist.`);
   return accountType.interestRate;
 };
 
