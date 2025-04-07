@@ -9,7 +9,7 @@ const getInterestRate = (typeOfAcc, accTypesArray) => {
 };
 
 const isNumberTaken = (accNumber, accsArray) =>
-  accsArray.some((acc) => acc.number === accNumber);
+  accsArray.some((acc) => acc.accountNumber === accNumber);
 
 const generateAccNumber = () =>
   Math.floor(1000000000 + Math.random() * 9000000000);
