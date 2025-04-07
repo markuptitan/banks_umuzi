@@ -43,6 +43,7 @@ describe("Bank tests", () => {
       );
     });
   });
+
   describe("openBankAccount", () => {
     it("should open an account and return a 10 digit number", () => {
       bank.addAccountType(savingsAccount);
@@ -55,13 +56,11 @@ describe("Bank tests", () => {
     let savingsAccountNumber;
     beforeEach(() => {
       bank.addAccountType(savingsAccount);
-      savingsAccountNumber = bank.openBankAccount(savingsAccount);
+      accountNumber = bank.openBankAccount(savingsAccount);
     });
 
-    it("should deposit money to an account successfully", () => {
-      expect(bank.getBalance({ accountNumber: savingsAccountNumber })).toBe(
-        "0.00"
-      );
+    it("should return the balance of an account successfully", () => {
+      expect(bank.getBalance({ accountNumber })).toBe("0.00");
     });
   });
 });
