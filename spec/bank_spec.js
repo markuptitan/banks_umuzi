@@ -184,4 +184,34 @@ describe("Bank tests", () => {
       ).toThrowError("Insufficient balance.");
     });
   });
+  describe("getInterestRate", () => {
+    let savingsInterestRate;
+    let currentAccountInterestRate;
+    let savingsAccountNumber;
+    let currentAccountNumber;
+
+    beforeEach(() => {
+      bank.addAccountType(savingsAccount);
+      bank.addAccountType(currentAccount);
+      savingsAccountNumber = bank.openBankAccount(savingsAccount);
+      currentAccountNumber = bank.openBankAccount(currentAccount);
+      savingsInterestRate = bank.getInterestRate({
+        accountNumber: savingsAccountNumber,
+      });
+      currentAccountInterestRate = bank.getInterestRate({
+        accountNumber: currentAccountNumber,
+      });
+    });
+
+    it("should throw an error if the account number is invalid", () => {
+      expect(() =>
+        bank.getInterestRate({ accountNumber: "1234567890" })
+      ).toThrowError("Account 1234567890 does not exist.");
+    });
+
+    it("should return the interest rate for a valid account type", () => {
+      expect(currentAccountInterestRate).toBe(2.5);
+      expect(savingsInterestRate).toBe(5);
+    });
+  });
 });
