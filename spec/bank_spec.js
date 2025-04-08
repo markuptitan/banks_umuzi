@@ -77,4 +77,27 @@ describe("Bank tests", () => {
       ).toThrowError("Account 1234567890 does not exist.");
     });
   });
+
+  describe("deposit", () => {
+    let savingsAccountNumber;
+    beforeEach(() => {
+      bank.addAccountType(savingsAccount);
+      accountNumber = bank.openBankAccount(savingsAccount);
+    });
+
+    it("should deposit money into an account successfully", () => {
+      bank.deposit({ accountNumber, amount: 100 });
+      expect(bank.getBalance({ accountNumber })).toBe("100.00");
+    });
+    it("should throw an error if the deposit amount is invalid", () => {
+      expect(() => bank.deposit({ accountNumber, amount: -50 })).toThrowError(
+        "Deposit amount must be greater than 0."
+      );
+    });
+    it("should throw an error if the account number is invalid", () => {
+      expect(() =>
+        bank.deposit({ accountNumber: "1234567890", amount: 100 })
+      ).toThrowError("Account 1234567890 does not exist.");
+    });
+  });
 });
