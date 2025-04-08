@@ -100,4 +100,33 @@ describe("Bank tests", () => {
       ).toThrowError("Account 1234567890 does not exist.");
     });
   });
+
+  describe("withdraw", () => {
+    let savingsAccountNumber;
+    beforeEach(() => {
+      bank.addAccountType(savingsAccount);
+      accountNumber = bank.openBankAccount(savingsAccount);
+    });
+
+    it("should withdraw money from an account successfully", () => {
+      bank.deposit({ accountNumber, amount: 100 });
+      bank.withdraw({ accountNumber, amount: 50 });
+      expect(bank.getBalance({ accountNumber })).toBe("50.00");
+    });
+    it("should throw an error if the withdrawal amount is invalid", () => {
+      expect(() => bank.withdraw({ accountNumber, amount: -50 })).toThrowError(
+        "Withdrawal amount must be greater than 0."
+      );
+    });
+    it("should throw an error if the withdrawal exceeds the balance", () => {
+      expect(() => bank.withdraw({ accountNumber, amount: 100 })).toThrowError(
+        "Cannot withdraw more than available balance"
+      );
+    });
+    it("should throw an error if the account number is invalid", () => {
+      expect(() =>
+        bank.withdraw({ accountNumber: "1234567890", amount: 100 })
+      ).toThrowError("Account 1234567890 does not exist.");
+    });
+  });
 });
