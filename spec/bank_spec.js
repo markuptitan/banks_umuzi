@@ -15,7 +15,7 @@ describe("Bank tests", () => {
   });
 
   describe("addAccountType", () => {
-    it("should add account types properly", () => {
+    it("addAccountType", () => {
       bank.addAccountType(savingsAccount);
 
       expect(
@@ -29,7 +29,6 @@ describe("Bank tests", () => {
 
     it("should not allow duplicate account types", () => {
       bank.addAccountType(savingsAccount);
-
       expect(() => bank.addAccountType(savingsAccount)).toThrowError(
         'Account type "Savings" already exists.'
       );
@@ -37,7 +36,6 @@ describe("Bank tests", () => {
 
     it("should not allow negative interest rates", () => {
       const invalidAccount = { accountType: "Invalid", interestRate: -1 };
-
       expect(() => bank.addAccountType(invalidAccount)).toThrowError(
         "Interest rate must be greater than 0."
       );
@@ -50,6 +48,17 @@ describe("Bank tests", () => {
       const accNum = bank.openBankAccount({ accountType: "Savings" });
       expect(isStringOfDigitsOnly(accNum)).toBe(true);
     });
+    it("should throw an error if the account type is not valid", () => {
+      expect(() =>
+        bank.openBankAccount({ accountType: "Invalid" })
+      ).toThrowError('Account type "Invalid" is not valid.');
+    });
+    it("should generate a unique account number", () => {
+      bank.addAccountType(savingsAccount);
+      const accNum1 = bank.openBankAccount({ accountType: "Savings" });
+      const accNum2 = bank.openBankAccount({ accountType: "Savings" });
+      expect(accNum1).not.toBe(accNum2);
+    });
   });
 
   describe("getBalance", () => {
@@ -61,6 +70,11 @@ describe("Bank tests", () => {
 
     it("should return the balance of an account successfully", () => {
       expect(bank.getBalance({ accountNumber })).toBe("0.00");
+    });
+    it("should throw an error if the account number is invalid", () => {
+      expect(() =>
+        bank.getBalance({ accountNumber: "1234567890" })
+      ).toThrowError("Account 1234567890 does not exist.");
     });
   });
 });
