@@ -87,6 +87,11 @@ class Bank {
     fromAccount.withdraw({ amount });
     toAccount.deposit({ amount });
   }
+
+  getInterestRate({ accountNumber }) {
+    const account = retrieveAccount(accountNumber, this.accounts);
+    return account.interestRate;
+  }
 }
 
 module.exports = { Bank };
