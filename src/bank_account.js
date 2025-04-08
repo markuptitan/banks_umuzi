@@ -20,7 +20,9 @@ class BankAccount {
   processAmount = (amount, type) => {
     validatePositiveNumber(
       amount,
-      `${type === "deposit" ? "Deposit" : "Withdrawal"} amount must be positive`
+      `${
+        type === "deposit" ? "Deposit" : "Withdrawal"
+      } amount must be greater than 0.`
     );
     if (type === "withdraw") {
       assert(
