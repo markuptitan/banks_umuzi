@@ -4,31 +4,36 @@ Welcome to the Simple Banking System project! 🚀 This is a fully tested, comma
 
 The project is based on Part 1 and Part 2 of the Africa Code Net syllabus, implementing a simple banking system with account management features like deposits, withdrawals, balance checks, transfers, and interest calculations.
 
-🔗 **Project Link**: ACN Syllabus - Banking System
+🔗 **Project Link**: [ACN Syllabus - Bank Accounts Part 1](http://syllabus.africacode.net/projects/oop/bank-accounts/part-1/) and [ACN Syllabus - Bank Accounts Part 2](http://syllabus.africacode.net/projects/oop/bank-accounts/part-2/)
 
 ## 📝 Features
 
-### Bank Class: 
+### Bank Class:
+
 Central class managing multiple bank accounts.
 
-### BankAccount Class: 
+### BankAccount Class:
+
 Handles individual bank accounts, supporting operations like deposits, withdrawals, and balance inquiries.
 
-### Interest Rate Management: 
+### Interest Rate Management:
+
 Bank offers different account types with varying interest rates. 💰
 
-### Fully Tested: 
+### Fully Tested:
+
 The entire system is thoroughly tested to ensure functionality and reliability. 🧪
 
 ## 🔧 Technologies Used
 
 - **JavaScript ES6**: Written using the latest ECMAScript 6 features to ensure a modern and clean codebase. ✨
 - **Node.js**: Runs in the command line with Node.js for backend operations. 🖥️
-- **Test Framework**: All methods are tested with the `assert` module to ensure the system functions correctly. ✅
+- **Test Framework**: All methods are tested with the `jasmne` testing framework to ensure the system functions correctly. ✅
 
 ## 📚 Classes and Methods
 
 ### Bank Class 🏦
+
 The Bank class handles the creation and management of bank accounts.
 
 - **addAccountType({ accountType, interestRate })**  
@@ -56,6 +61,7 @@ The Bank class handles the creation and management of bank accounts.
   Compounds the interest on all accounts in the bank.
 
 ### BankAccount Class 💳
+
 The BankAccount class handles individual account details and transactions.
 
 - **deposit({ amount })**  
