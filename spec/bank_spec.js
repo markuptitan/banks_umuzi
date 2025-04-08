@@ -1,4 +1,5 @@
 const { Bank } = require("./../src/bank");
+const { Decimal } = require("decimal.js");
 
 const savingsAccount = { accountType: "Savings", interestRate: 5 };
 const currentAccount = { accountType: "Current", interestRate: 2.5 };
@@ -210,8 +211,8 @@ describe("Bank tests", () => {
     });
 
     it("should return the interest rate for a valid account type", () => {
-      expect(currentAccountInterestRate).toBe(2.5);
-      expect(savingsInterestRate).toBe(5);
+      expect(currentAccountInterestRate.equals(new Decimal(2.5))).toBe(true);
+      expect(savingsInterestRate.equals(new Decimal(5))).toBe(true);
     });
   });
 });
