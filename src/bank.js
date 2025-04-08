@@ -63,6 +63,10 @@ class Bank {
     const account = retrieveAccount(accountNumber, this.accounts);
     return account.balance;
   }
+  deposit({ accountNumber, amount }) {
+    const account = retrieveAccount(accountNumber, this.accounts);
+    account.deposit({ amount });
+  }
 }
 
 module.exports = { Bank };
