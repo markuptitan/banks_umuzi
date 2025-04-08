@@ -34,13 +34,13 @@ describe("BankAccount tests", () => {
 
   it("should throw an error if deposit amount is negative", () => {
     expect(() => account.deposit({ amount: -500 })).toThrowError(
-      "Deposit amount must be positive"
+      "Deposit amount must be greater than 0."
     );
   });
 
   it("should throw an error if withdraw amount is negative", () => {
     expect(() => account.withdraw({ amount: -500 })).toThrowError(
-      "Withdrawal amount must be positive"
+      "Withdrawal amount must be greater than 0."
     );
   });
 
