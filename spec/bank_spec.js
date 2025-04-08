@@ -129,4 +129,59 @@ describe("Bank tests", () => {
       ).toThrowError("Account 1234567890 does not exist.");
     });
   });
+
+  describe("transfer", () => {
+    let fromAccountNumber;
+    let toAccountNumber;
+    beforeEach(() => {
+      bank.addAccountType(savingsAccount);
+      bank.addAccountType(currentAccount);
+      fromAccountNumber = bank.openBankAccount(savingsAccount);
+      toAccountNumber = bank.openBankAccount(currentAccount);
+    });
+
+    it("should transfer money between accounts successfully", () => {
+      bank.deposit({ accountNumber: fromAccountNumber, amount: 100 });
+      bank.transfer({
+        fromAccountNumber,
+        toAccountNumber,
+        amount: 50,
+      });
+
+      expect(bank.getBalance({ accountNumber: fromAccountNumber })).toBe(
+        "50.00"
+      );
+      expect(bank.getBalance({ accountNumber: toAccountNumber })).toBe("50.00");
+    });
+
+    it("should throw an error if the transfer amount is invalid", () => {
+      expect(() =>
+        bank.transfer({
+          fromAccountNumber,
+          toAccountNumber,
+          amount: -50,
+        })
+      ).toThrowError("Transfer amount must be greater than 0.");
+    });
+
+    it("should throw an error if the accounts are the same", () => {
+      expect(() =>
+        bank.transfer({
+          fromAccountNumber,
+          toAccountNumber: fromAccountNumber,
+          amount: 50,
+        })
+      ).toThrowError("Cannot transfer to the same account.");
+    });
+
+    it("should throw an error if the balance in fromAccount is insufficient", () => {
+      expect(() =>
+        bank.transfer({
+          fromAccountNumber,
+          toAccountNumber,
+          amount: 50,
+        })
+      ).toThrowError("Insufficient balance.");
+    });
+  });
 });

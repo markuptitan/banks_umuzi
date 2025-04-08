@@ -72,6 +72,21 @@ class Bank {
     const account = retrieveAccount(accountNumber, this.accounts);
     account.withdraw({ amount });
   }
+
+  transfer({ fromAccountNumber, toAccountNumber, amount }) {
+    const fromAccount = retrieveAccount(fromAccountNumber, this.accounts);
+    const toAccount = retrieveAccount(toAccountNumber, this.accounts);
+
+    assert(
+      fromAccountNumber !== toAccountNumber,
+      "Cannot transfer to the same account."
+    );
+    assert(amount > 0, "Transfer amount must be greater than 0.");
+    assert(fromAccount.balance >= amount, "Insufficient balance.");
+
+    fromAccount.withdraw({ amount });
+    toAccount.deposit({ amount });
+  }
 }
 
 module.exports = { Bank };
