@@ -215,4 +215,46 @@ describe("Bank tests", () => {
       expect(savingsInterestRate.equals(new Decimal(5))).toBe(true);
     });
   });
+
+  describe("compoundInterest", () => {
+    let savingsAccountNumber;
+    let currentAccountNumber;
+    beforeEach(() => {
+      bank.addAccountType(savingsAccount);
+      bank.addAccountType(currentAccount);
+      savingsAccountNumber = bank.openBankAccount(savingsAccount);
+      currentAccountNumber = bank.openBankAccount(currentAccount);
+    });
+    it("should compound interest on a savings account", () => {
+      bank.deposit({ accountNumber: savingsAccountNumber, amount: 1200 });
+      bank.compoundInterest();
+      expect(bank.getBalance({ accountNumber: savingsAccountNumber })).toBe(
+        "1205.00"
+      );
+    });
+    it("should compound interest on a current account", () => {
+      bank.deposit({ accountNumber: currentAccountNumber, amount: 1200 });
+      bank.compoundInterest();
+      expect(bank.getBalance({ accountNumber: currentAccountNumber })).toBe(
+        "1202.50"
+      );
+    });
+    it("should compound interest on a zero balance account", () => {
+      bank.compoundInterest();
+      expect(bank.getBalance({ accountNumber: savingsAccountNumber })).toBe(
+        "0.00"
+      );
+    });
+    it("should compound interest all accounts at once", () => {
+      bank.deposit({ accountNumber: savingsAccountNumber, amount: 1200 });
+      bank.deposit({ accountNumber: currentAccountNumber, amount: 1200 });
+      bank.compoundInterest();
+      expect(bank.getBalance({ accountNumber: savingsAccountNumber })).toBe(
+        "1205.00"
+      );
+      expect(bank.getBalance({ accountNumber: currentAccountNumber })).toBe(
+        "1202.50"
+      );
+    });
+  });
 });

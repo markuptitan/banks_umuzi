@@ -92,6 +92,11 @@ class Bank {
     const account = retrieveAccount(accountNumber, this.accounts);
     return account.interestRate;
   }
+  compoundInterest() {
+    this.accounts.forEach((account) => {
+      account.compoundInterest();
+    });
+  }
 }
 
 module.exports = { Bank };
